@@ -9,12 +9,14 @@
                 <div class="float-right my-2">
                     <form action="/logout" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-success">Logout</button>
+                        <button type="submit" class="btn btn-danger">Logout</button>
                     </form>
-                    {{-- <a class="btn btn-success" href="/login.sign">Logout</a> --}}
                 </div>
                 <div class="float-right my-2 mr-3">
                     <a class="btn btn-success" href="{{ route('bukus.create') }}"> Input Buku</a>
+                </div>
+                <div class="float-right my-2 mr-3">
+                    <a class="btn btn-success" href="/home">Home</a>
                 </div>
         </div>
     </div>
@@ -32,9 +34,8 @@
             <th>Kategori</th>
             <th>Penerbit</th>
             <th>Pengarang</th>
-            <th>jumlah</th>
+            <th>Stok</th>
             <th>Status</th>
-            <th>Tahun Terbit</th>
             <th width="250px">Action</th>
         </tr>
         @foreach ($bukus as $Buku)
@@ -42,13 +43,11 @@
 
                 <td>{{ $Buku->id_buku }}</td>
                 <td>{{ $Buku->judul }}</td>
-                <td>{{ $Buku->kategori }}</td>
+                <td>{{ $Buku->kategori->nama_kategori }}</td>
                 <td>{{ $Buku->penerbit }}</td>
                 <td>{{ $Buku->pengarang }}</td>
                 <td>{{ $Buku->jumlah }}</td>
                 <td>{{ $Buku->status }}</td>
-                <td>{{ $Buku->kelas->nama_kelas }}</td>
-                {{-- <td>{{ $Buku->kelas ? $Buku->kelas->nama_kelas : 'Tanpa Kelas'}}</td> --}}
                 <td>
                     <form action="{{ route('bukus.destroy', $Buku->id_buku) }}" method="POST">
 

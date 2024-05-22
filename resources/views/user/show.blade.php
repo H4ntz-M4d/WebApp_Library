@@ -1,4 +1,4 @@
-@extends('bukus.layout')
+@extends('layout.stage')
 
 @section('content')
     <div class="container mt-5">
@@ -7,7 +7,7 @@
                 <div class="card-header">
                     Detail Buku
                 </div>
-                <form action="/articles" method="post" enctype="multipart/form-data">
+                <form action="/articles" method="post">
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         <li>
@@ -23,7 +23,7 @@
                     </ul>
                 </div>
                 </form>
-                <a class="btn btn-success mt-3" href="{{ route('bukus.index') }}">Kembali</a>
+                <a class="btn btn-success mt-3" href="/list-book">Kembali</a>
             </div>
         </div>
     </div>

@@ -21,7 +21,7 @@
 
     {{-- Login CSS --}}
     <link rel="stylesheet" href="/css/style.css">
-
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>

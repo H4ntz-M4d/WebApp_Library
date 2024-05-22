@@ -4,7 +4,7 @@
 
     <div class="container mt-5">
 
-        <div class="row justify-content-center align-items-center">
+        <div class="row justify-content-center align-items-center" >
             <div class="card" style="width: 24rem;">
                 <div class="card-header">
                     Edit Buku
@@ -20,7 +20,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="post" action="{{ route('bukus.update', $Buku->id_buku) }}" id="myForm">
+                    <form method="post" action="{{ route('bukus.update', $Buku->id_buku) }}" id="myForm" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
@@ -35,8 +35,13 @@
                         </div>
                         <div class="form-group">
                             <label for="kategori">Kategori</label>
-                            <input type="kategori" name="kategori" class="form-control" id="kategori"
-                                value="{{ $Buku->kategori }}" aria-describedby="kategori">
+                            <select class="form-control" name="kategori">
+                                @foreach ($kategori as $ktg)
+                                    <option value="{{ $ktg->id }}"
+                                        {{ $Buku->kategori_id == $ktg->id ? 'selected' : '' }}>{{ $ktg->nama_kategori }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="penerbit">Penerbit</label>
@@ -59,13 +64,12 @@
                                 value="{{ $Buku->status }}" aria-describedby="status">
                         </div>
                         <div class="form-group">
-                            <label for="kelas">Tahun Terbit</label>
-                            <select class="form-control" name="kelas">
-                                @foreach($kelas as $kls)
-                                    <option value="{{ $kls->id }}" {{ $Buku->kelas_id == $kls->id ? 'selected' : '' }}>{{ $kls->nama_kelas}}</option>
-                                @endforeach
-                            </select>
+                            <label for="featured_image">Feature Image</label>
+                            <input type="file" class="form-control" required="required" name="featured_image"
+                                value="{{ $Buku->featured_image }}">
+                            <img width="150px" src="{{ asset('storage/' . $Buku->featured_image) }}">
                         </div>
+
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

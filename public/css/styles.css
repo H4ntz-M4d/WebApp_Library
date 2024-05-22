@@ -1,0 +1,199 @@
+body{
+    margin: 0 ;
+    font-family: 'Kumbh Sans', sans-serif;
+    display: flex;
+    align-items: center;
+  }
+
+  .btn-out{
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    padding: 20px;
+    margin: 0px;
+    width: 100%;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    justify-content: center;
+    border: none;
+    background: rgb(196, 0, 0);
+    outline: none;
+    cursor: pointer;
+  }
+
+  .btn-out:hover{
+    background-color: #606887;
+  }
+
+/* dashboard menu */
+  .navbar-icon{
+      background-color: #152259;
+      width: 15rem;
+      height: 30vh;
+      border-bottom: 3px solid white;
+      overflow: visible;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+  }
+
+  .logo{
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .navbar-btn{
+    background-color: #152259;
+    width: 15rem;
+    height: 70vh;
+    display: flex;
+    overflow: visible;
+    flex-direction: column;
+    padding-top: 5rem;
+    align-items: center;
+    position: relative;
+  }
+
+  .btn-nav{
+    padding: 10px;
+    margin: 5px;
+    width: 10rem;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    display: inline-flex;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .btn-nav:hover{
+    border-radius: 20px;
+    background-color: #606887;
+  }
+
+  .container-dashboard-home{
+    width: 84vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+  }
+
+  .container-dashboard{
+    width: 84vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gainsboro;
+  }
+
+  .label{
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+  /* shopping menu */
+.list-barang{
+    background-color: white;
+    width: 70rem;
+    height: 40rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* cart menu */
+.container-dashboard-shop{
+    width: 83vw;
+    height: 120vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gainsboro;
+  }
+
+  .product-shop{
+    width: 60rem;
+    height: auto;
+    overflow: auto;
+  }
+
+  .navbar-btn-shop{
+    background-color: #152259;
+      width: 15rem;
+      height: 90vh;
+      display: flex;
+      overflow: visible;
+      flex-direction: column;
+      padding-top: 5rem;
+      align-items: center;
+      position: relative;
+  }
+
+  .navbar-icon-shop{
+    background-color: #152259;
+    width: 15rem;
+    height: 30vh;
+    border-bottom: 3px solid white;
+    overflow: visible;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.list-barang-shop{
+    background-color: white;
+    width: 70rem;
+    height: 50rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.label-shop-cart{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.search{
+    display: flex;
+    margin-bottom: 2rem;
+}
+/* cart menu */
+
+
+.label-shop{
+    margin-bottom: 3rem;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.product{
+    width: 60rem;
+    height: auto;
+    overflow: auto;
+}
+
+.btn-action{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-form{
+    margin: 5px;
+    font-size: 12px;
+}
+
+.formCart{
+    display: flex;
+    flex-direction: column;
+}

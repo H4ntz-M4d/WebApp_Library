@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Kelas;
+use App\Models\Kategori;
+use Illuminate\Support\Facades\Storage;
 
 class BukuController extends Controller
 {
@@ -15,7 +16,7 @@ class BukuController extends Controller
     public function index()
     {
         //fungsi eloquent menampilkan data menggunakan pagination
-        $bukus = Buku::with('kelas')->get();
+        $bukus = Buku::with('kategori')->get();
         $paginate = Buku::orderBy('id_buku', 'desc')->paginate(3);
         return view('index', ['bukus' => $bukus, 'paginate'=>$paginate]);
     }
@@ -25,8 +26,8 @@ class BukuController extends Controller
      */
     public function create()
     {
-        $kelas = Kelas::all();
-        return view('create',['kelas' => $kelas]);
+        $kategori = Kategori::all();
+        return view('create',['kategori' => $kategori]);
     }
 
     /**
@@ -43,23 +44,23 @@ class BukuController extends Controller
             'pengarang' => 'required',
             'jumlah' => 'required',
             'status' => 'required',
-            'kelas' => 'required',
             ]);
 
             $buku = new Buku;
             $buku->id_buku = $request->get('id_buku');
             $buku->judul = $request->get('judul');
-            $buku->kategori = $request->get('kategori');
             $buku->penerbit = $request->get('penerbit');
             $buku->pengarang = $request->get('pengarang');
             $buku->jumlah = $request->get('jumlah');
             $buku->status = $request->get('status');
+            $buku->featured_image = $request->file('featured_image')->store('images','public');
 
-            $kelas = new Kelas;
-            $kelas->id = $request->get('kelas');
 
-            //fungsi eloquent untuk menambah data
-            $buku->kelas()->associate($kelas);
+            $kategori = new Kategori;
+            $kategori->id = $request->get('kategori');
+
+            //fungsi eloquent untuk menambah data dengan relasi belongTo
+            $buku->kategori()->associate($kategori);
             $buku->save();
 
             //jika data berhasil ditambahkan, akan kembali ke halaman utama
@@ -73,7 +74,7 @@ class BukuController extends Controller
     public function show($id_buku)
     {
         //menampilkan detail data dengan menemukan/berdasarkan Nim Mahasiswa
-        $Buku = Buku::with('kelas')->where('id_buku',$id_buku)->first();
+        $Buku = Buku::with('kategori')->where('id_buku',$id_buku)->first();
         return view('detail', ['Buku' => $Buku]);
     }
 
@@ -82,9 +83,9 @@ class BukuController extends Controller
      */
     public function edit($id_buku)
     {
-        $Buku = Buku::with('kelas')->where('id_buku',$id_buku)->first();
-        $kelas = Kelas::all();
-        return view('edit', compact('Buku', 'kelas'));
+        $Buku = Buku::with('kategori')->where('id_buku',$id_buku)->first();
+        $kategori = Kategori::all();
+        return view('edit', compact('Buku', 'kategori'));
     }
 
     /**
@@ -101,19 +102,31 @@ class BukuController extends Controller
             'pengarang' => 'required',
             'jumlah' => 'required',
             'status' => 'required',
-            'kelas' => 'required',
             ]);
 
-            $buku = Buku::with('kelas')->where('id_buku',$id_buku)->first();
+            $buku = Buku::with('kategori')->where('id_buku',$id_buku)->first();
             $buku->id_buku = $request->get('id_buku');
             $buku->judul = $request->get('judul');
-            $buku->kategori = $request->get('kategori');
+            $buku->penerbit = $request->get('penerbit');
+            $buku->pengarang = $request->get('pengarang');
+            $buku->jumlah = $request->get('jumlah');
+            $buku->status = $request->get('status');
 
-            $kelas = new Kelas;
-            $kelas->id = $request->get('kelas');
+
+            // Menghapus gambar lama jika ada
+            if ($buku->featured_image && Storage::exists('public/' . $buku->featured_image)) {
+                Storage::delete('public/' . $buku->featured_image);
+            }
+            // Menyimpan gambar yang baru diunggah
+            $buku->featured_image = $request->file('featured_image')->store('images', 'public');
+
+
+
+            $kategori = new Kategori;
+            $kategori->id = $request->get('kategori');
 
             //fungsi eloquent untuk menambah data
-            $buku->kelas()->associate($kelas);
+            $buku->kategori()->associate($kategori);
             $buku->save();
 
         //jika data berhasil diupdate, akan kembali ke halaman utama

@@ -20,11 +20,12 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="post" action="{{ route('bukus.store') }}" id="myForm">
+                    <form method="post" action="{{ route('bukus.store') }}" id="myForm" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="id_buku">ID Buku</label>
-                            <input type="text" name="id_buku" class="form-control" id="id_buku" aria-describedby="id_buku">
+                            <input type="text" name="id_buku" class="form-control" id="id_buku"
+                                aria-describedby="id_buku">
                         </div>
                         <div class="form-group">
                             <label for="judul">Judul</label>
@@ -33,8 +34,11 @@
                         </div>
                         <div class="form-group">
                             <label for="kategori">Kategori</label>
-                            <input type="kategori" name="kategori" class="form-control" id="kategori"
-                                aria-describedby="password">
+                            <select class="form-control" name="kategori">
+                                @foreach ($kategori as $ktg)
+                                    <option value="{{ $ktg->id }}">{{ $ktg->nama_kategori }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="penerbit">Penerbit</label>
@@ -56,14 +60,9 @@
                             <input type="status" name="status" class="form-control" id="status"
                                 aria-describedby="status">
                         </div>
-                        <div class="form-group">
-                            <label for="kelas">Tahun Terbit</label>
-                            <select class="form-control" name="kelas">
-                                @foreach($kelas as $kls)
-                                    <option value="{{ $kls->id }}">{{ $kls->nama_kelas}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <label for="featured_image">Feature Image: </label>
+                        <input type="file" class="form-control" required="required" name="featured_image"><br>
+
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

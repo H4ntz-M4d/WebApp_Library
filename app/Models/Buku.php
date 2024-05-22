@@ -7,16 +7,13 @@ use Illuminate\Foundation\Auth\Buku as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-    class Buku extends Model //Definisi Model
+    class Buku extends Model
 {
-    protected $table="buku"; // Eloquent akan membuat model mahasiswa menyimpan record di tabel mahasiswas
+    protected $table="buku";
     public $timestamps= false;
-    protected $primaryKey = 'id_buku'; // Memanggil isi DB Dengan primarykey
-    /**
-     * The attributes that are mass assignable.
-     *
-     *
-     */
+    protected $primaryKey = 'id_buku';
+
+
     protected $fillable = [
     'id_buku',
     'judul',
@@ -25,10 +22,10 @@ use Illuminate\Database\Eloquent\Model;
     'pengarang',
     'jumlah',
     'status',
-    'kelas_id',
+    'featured_image',
     ];
 
-    public function kelas(){
-        return $this->belongsTo(Kelas::class);
+    public function kategori(){
+        return $this->belongsTo(Kategori::class);
     }
 };
